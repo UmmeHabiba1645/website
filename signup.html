@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <input type="text" id="newUsername" placeholder="Enter username" required>
+            <input type="password" id="newPassword" placeholder="Enter password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Log in here</a></p>
+        <p id="signupError" style="color: red;"></p>
+    </div>
+
+    <script>
+        const signupForm = document.getElementById('signupForm');
+        const signupError = document.getElementById('signupError');
+
+        signupForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            const registeredUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+            const userExists = registeredUsers.find(user => user.username === newUsername);
+
+            if (userExists) {
+                signupError.innerText = "Username already exists. Please choose another.";
+            } else {
+                registeredUsers.push({ username: newUsername, password: newPassword });
+                localStorage.setItem('users', JSON.stringify(registeredUsers));
+                alert("Signup successful! Please log in.");
+                window.location.href = "login.html"; // Redirect to login page
+            }
+        });
+    </script>
+</body>
+</html>

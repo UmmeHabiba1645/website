@@ -1,0 +1,140 @@
+/* Responsive for screens from 1100px and below */
+@media screen and (max-width: 1100px) {
+    /* Adjust header section */
+    .header-section {
+        height: auto;
+        padding: 50px 20px;
+        clip-path: none; /* Remove ellipse shape for small screens */
+        text-align: center;
+    }
+
+    /* Stack navigation links vertically and center them */
+    .nav {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        padding-top: 10px;
+    }
+
+    .a {
+        margin: 10px 0;
+    }
+
+    /* Adjust content alignment */
+    .d {
+        margin: 50px auto;
+        width: 90%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    /* Main section adjustments */
+    .main {
+        display: block;
+        text-align: center;
+    }
+
+    .im {
+        position: static;
+        display: block;
+        margin: 20px auto;
+        height: 300px;
+    }
+
+    .di2 {
+        position: static;
+        margin: 20px auto;
+        width: 90%;
+        text-align: center;
+    }
+
+    /* Form input and button adjustments */
+    .input,
+    .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Further adjustments for tablet screens */
+    .div {
+        flex-direction: column;
+        top: auto;
+        margin-top: 50px;
+        left: 0;
+    }
+
+    .div2 {
+        margin: 20px auto;
+        width: 60%;
+    }
+
+    .div4 {
+        top: auto;
+        flex-direction: column;
+        margin-top: 20px;
+        left: 0;
+    }
+
+    .footer {
+        top: auto;
+        left: 10%;
+        margin-top: 40px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Mobile-specific adjustments */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .im {
+        height: 250px;
+    }
+
+    .div2 {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .di3 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input,
+    .btn {
+        width: 60%;
+    }
+
+    .footer {
+        left: 0;
+        margin: 20px auto;
+    }
+
+    .button {
+        width: 90%;
+        right: auto;
+        margin-top: 10px;
+    }
+}
