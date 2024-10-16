@@ -160,16 +160,31 @@ footer {
     }
 
     .main {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center; /* Center items horizontally */
     }
-    
-     .im {
-        position: relative;
-        height: 300px;
-        width: 300px;
-        margin: 10px 10px;
-    } 
+
+    .im {
+        height: auto; /* Maintain aspect ratio */
+        width: 100%; /* Full width for responsive design */
+        max-width: 300px; /* Maximum width */
+        margin: 20px 0; /* Adjust margin */
+        position: relative; /* Set relative positioning */
+    }
+
+    .text-overlay {
+        position: absolute; /* Positioning to overlay text on image */
+        top: 50%; /* Center vertically */
+        left: 50%; /* Center horizontally */
+        transform: translate(-50%, -50%); /* Centering the text */
+        color: white; /* Text color for contrast */
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        padding: 10px; /* Some padding around the text */
+        text-align: center; /* Center text alignment */
+        z-index: 10; /* Make sure text is on top */
+    }
 
     .di2 {
         position: relative;
@@ -227,50 +242,56 @@ footer {
         margin-top: 10px;
     }
 }
-.all{
+
+.all {
     width: 500px;
     margin-left: 100px;
     font-size: 25px;
 }
-.n{
+
+.n {
     animation: img 15s infinite;
 }
-@keyframes img{
-    0%{
+
+@keyframes img {
+    0% {
         transform: rotate(50deg);
     }
-    50%{
+    50% {
         transform: rotate(90deg);
     }
-    70%{
+    70% {
         transform: rotate(270deg);
     }
-    100%{
+    100% {
         transform: rotate(360deg);
     }
-} 
-.f{
+}
+
+.f {
     border-radius: 20px;
     padding: 10px;
     background-color: #ccc;
-    border: 2px white groove ;
-
+    border: 2px white groove;
 }
-.image{
+
+.image {
     margin-top: 70px;
     display: flex;
     margin-left: 10px;
 }
-.n{
+
+.n {
     position: relative;
     width: 400px;
     margin-left: 180px;
-
 }
-.l{
+
+.l {
     display: flex;
 }
-.join{
+
+.join {
     background-color: blue;
     border-radius: 20px;
     padding: 10px;
@@ -278,10 +299,12 @@ footer {
     color: whitesmoke;
     border: 2px blue solid;
 }
-.c{
+
+.c {
     text-align: center;
 }
-.w{
+
+.w {
     padding: 8px;
     border-radius: 20px;
 }
