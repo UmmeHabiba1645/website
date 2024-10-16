@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Welcome to your Profile</h2>
+        <p id="welcomeMessage"></p>
+
+        <!-- User Details Section -->
+        <div class="user-details">
+            <h3>Your Details</h3>
+            <p><strong>Username:</strong> <span id="username"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span> <!-- Add email later in signup if needed -->
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="profile-navigation">
+            <button id="htmlPageButton">Go to Main Page (html.html)</button>
+            <button id="editProfileButton">Edit Profile</button>
+            <button id="logoutButton">Logout</button>
+        </div>
+
+        <!-- Profile Edit Form (hidden by default) -->
+        <div id="editProfileForm" style="display: none;">
+            <h3>Edit Your Profile</h3>
+            <form id="profileEditForm">
+                <input type="text" id="editUsername" placeholder="Enter new username">
+                <input type="email" id="editEmail" placeholder="Enter new email">
+                <button type="submit">Save Changes</button>
+            </form>
+            <p id="updateMessage" style="color: green;"></p>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve the logged-in user from localStorage
+        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+        if (loggedInUser) {
+            // Display username and email
+            document.getElementById('welcomeMessage').innerText = `Hello, ${loggedInUser.username}!`;
+            document.getElementById('username').innerText = loggedInUser.username;
+            document.getElementById('email').innerText = loggedInUser.email || "Not provided"; // Default if email doesn't exist
+        } else {
+            // Redirect to login if no user is logged in
+            window.location.href = "login.html";
+        }
+
+        // Handle logout
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('loggedInUser'); // Remove the logged-in user from localStorage
+            window.location.href = "login.html"; // Redirect to login page
+        });
+
+        // Handle navigation to html.html
+        document.getElementById('htmlPageButton').addEventListener('click', function() {
+            window.location.href = "html.html"; // Redirect to your main page
+        });
+
+        // Handle profile edit
+        document.getElementById('editProfileButton').addEventListener('click', function() {
+            document.getElementById('editProfileForm').style.display = 'block'; // Show the edit form
+        });
+
+        // Save profile changes
+        document.getElementById('profileEditForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const newUsername = document.getElementById('editUsername').value;
+            const newEmail = document.getElementById('editEmail').value;
+
+            if (newUsername) {
+                loggedInUser.username = newUsername;
+                document.getElementById('username').innerText = newUsername;
+            }
+            if (newEmail) {
+                loggedInUser.email = newEmail;
+                document.getElementById('email').innerText = newEmail;
+            }
+
+            // Update the user information in localStorage
+            localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+            document.getElementById('updateMessage').innerText = "Profile updated successfully!";
+        });
+    </script>
+</body>
+</html>
