@@ -1,28 +1,50 @@
-<script>
-// Email form validation
-document.querySelector('.email-form').addEventListener('submit', function(event) {
-    const emailInput = document.querySelector('.email-form input[type="email"]');
-    const email = emailInput.value;
+// Handle the login process
+const loginForm = document.getElementById('loginForm');
+const error = document.getElementById('error');
 
-    if (!validateEmail(email)) {
-        alert('Please enter a valid email address');
-        event.preventDefault(); // Prevent form submission
-    }
-});
+if (loginForm) {
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-// Function to validate email format
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
+        // Check if user is already registered
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const registeredUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        const user = registeredUsers.find(user => user.username === username && user.password === password);
+        if (user) {
+            // Login success
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            window.location.href = "profile.html"; // Redirect to profile page
+        } else {
+            error.innerText = "Invalid credentials or user not found. Please sign up.";
+        }
+    });
 }
 
-// Smooth scrolling for navigation links (if needed)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+// Handle the signup process
+const signupForm = document.getElementById('signupForm');
+const signupError = document.getElementById('signupError');
+
+if (signupForm) {
+    signupForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const newUsername = document.getElementById('newUsername').value;
+        const newPassword = document.getElementById('newPassword').value;
+
+        const registeredUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        const userExists = registeredUsers.find(user => user.username === newUsername);
+
+        if (userExists) {
+            signupError.innerText = "Username already exists. Please choose another.";
+        } else {
+            registeredUsers.push({ username: newUsername, password: newPassword });
+            localStorage.setItem('users', JSON.stringify(registeredUsers));
+            alert("Signup successful! Please log in.");
+            window.location.href = "html.html"; // Redirect to login page
+        }
     });
-});
-</script>
+}
